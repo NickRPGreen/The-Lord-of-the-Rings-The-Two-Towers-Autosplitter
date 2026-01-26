@@ -9,4 +9,4 @@ ASL Includes:
 
 Requires emu-help-v3 to be added to your LiveSplit\Components folder: https://github.com/Jujstme/emu-help-v3
 
-Also available are blank split files for Aragon and Legolas/Gimli.
+Also available are blank split files for Aragon and Legolas/Gimli/Isildur.
