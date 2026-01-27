@@ -5,7 +5,7 @@
 state("LiveSplit") {}
 
 startup {
-    //Creates a persistent instance of the GameCube class (for Dolphin and Retroarch)
+    // Creates a persistent instance of the GameCube class (for Dolphin and Retroarch)
 	Assembly.Load(File.ReadAllBytes("Components/emu-help-v3")).CreateInstance("GCN");
     vars.MenuType = vars.Helper.Make<ushort>(0x801C6a8E); // 1=Level Select, 2=Credits, 3=Load Game, 4=Main Menu, 5=Options, 6=Loading/Cutscene/Gameplay, 7=Save Game, 8=Opening Creidts, 9=Score Screen, 10=Upgrades, 11=Artwork
     vars.State = vars.Helper.Make<ushort>(0x801CF6BE); // 0=No Value, 1=Loading/Cutscene, 2=Game, 3=Quit Level 4=??
@@ -35,8 +35,10 @@ start {
 }
 
 split {
+	// Aragorn split from Prologue to Weathertop
+    if (vars.MenuType.Old == 9 && vars.MenuType.Current == 6 && vars.Level.Current == 17792) return true;
     // Split when starting a new level
-    if (vars.MenuProgress.Current == 3 && vars.IsMenu.Old == 0 && vars.IsMenu.Current == 6) return true;
+    else if (vars.MenuProgress.Current == 3 && vars.IsMenu.Old == 0 && vars.IsMenu.Current == 6) return true;
     // Split on final cutscene
     else if (vars.Final.Changed && vars.Level.Current == 17952 && (vars.Final.Current == 528 || vars.Final.Current == 20112 || vars.Final.Current == 15376)) return true;
 }
