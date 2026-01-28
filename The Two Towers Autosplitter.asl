@@ -52,7 +52,7 @@ startup {
     for(int i = 0; i<vars.levelNames.Count; i++){
         settings.Add(vars.levelNames[i],true,vars.levelNames[i],"splits");
         for(int j = 1; j<vars.levels[vars.levelNames[i]].Count -1; j++) {
-            settings.Add(vars.levels[vars.levelNames[i]][j],true,vars.levels[vars.levelNames[i]][j],vars.levelNames[i]);
+            settings.Add(vars.levels[vars.levelNames[i]][j],false,vars.levels[vars.levelNames[i]][j],vars.levelNames[i]);
         }
     }
 }
@@ -134,3 +134,4 @@ reset {
 shutdown {
     vars.Helper.Dispose();
 }
+
