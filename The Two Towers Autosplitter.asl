@@ -55,6 +55,7 @@ startup {
             settings.Add(vars.levels[vars.levelNames[i]][j],false,vars.levels[vars.levelNames[i]][j],vars.levelNames[i]);
         }
     }
+	settings.SetToolTip("Trolls Defeated","This split will always trigger whether ticked or not");
 }
 
 update {
@@ -134,5 +135,6 @@ reset {
 shutdown {
     vars.Helper.Dispose();
 }
+
 
 
