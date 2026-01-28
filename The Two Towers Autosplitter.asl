@@ -30,7 +30,7 @@ startup {
         {"Weathertop", new List<string> {"Back foul thing","Help! They're everywhere!","We shall find you","END"}},
         {"Gates of Moria", new List<string> {"This land has changed","Quickly this way","My cousin, Balin","Watcher in the Water","END"}},
         {"Balin's Tomb", new List<string> {"Goblin horde","Cave troll melee","Cave troll ranged","END"}},
-        {"Amon Hen", new List<string> {"We must defend him","Find the Halfling!","Fire","Frodo hides","Bridge","Enter Lurtz","Lurtz Fight","END"}},
+        {"Amon Hen", new List<string> {"We must defend him","Find the Halfling!","Fire","Frodo hides","Bridge","Frodo Escapes","Enter Lurtz","Lurtz Fight","END"}},
         {"Fangorn Forest", new List<string> {"Split up","Forest Troll 1","Camp Pit","Forest Troll 2","Forest Troll 3 & 4", "END"}},
         {"Plains of Rohan", new List<string> {"Arrival","Gandalf Blast","Through the fire","Save the couple","END"}},
         {"Westfold", new List<string> {"Strange explosives","Gate","Lake","END"}},
@@ -135,6 +135,7 @@ reset {
 shutdown {
     vars.Helper.Dispose();
 }
+
 
 
 
