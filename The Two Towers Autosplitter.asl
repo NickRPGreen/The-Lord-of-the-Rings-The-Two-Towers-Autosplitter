@@ -48,7 +48,7 @@ startup {
     settings.SetToolTip("falseStart","Leave unchecked to only start on Prologue/Gates of Moria");
     
     settings.Add("splits",true,"Splits");
-    settings.SetToolTip("splits","Split upon starting ticked level, or reaching ticked cutscene");
+    settings.SetToolTip("splits","Split upon starting ticked level, or reaching ticked cutscene. Final split when defeating trolls always splits whether ticked or not.");
     for(int i = 0; i<vars.levelNames.Count; i++){
         settings.Add(vars.levelNames[i],true,vars.levelNames[i],"splits");
         for(int j = 1; j<vars.levels[vars.levelNames[i]].Count -1; j++) {
@@ -119,7 +119,7 @@ split {
         vars.subSplit++;
         var check = vars.levels[vars.levelNames[vars.levelNumbers.IndexOf(vars.Level.Current)]][vars.subSplit-1];
         if(vars.subSplit == 1) return false;
-        else if (settings[check] && check != "END"){
+        else if ((settings[check] && check != "END") || check == "Trolls Defeated"){
             vars.undoSplit++;
             print("Subsplit Skip: " + check);
             return true;
@@ -134,4 +134,5 @@ reset {
 shutdown {
     vars.Helper.Dispose();
 }
+
 
