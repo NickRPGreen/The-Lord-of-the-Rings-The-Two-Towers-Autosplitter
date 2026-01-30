@@ -26,7 +26,7 @@ startup {
     T.undoSplit = 0;
     T.currentLevel = 0;
     T.start = false;
-    T.timerModel = new TimerModel { CurrentState = timer };
+    T.timerModel = new TimerModel {CurrentState = timer};
 
     // Menus
     T.menus = new Dictionary<int, string>(){
@@ -62,18 +62,18 @@ startup {
     T.levelNames = new List<string> {"Prologue","Weathertop","Gates of Moria","Balin's Tomb","Amon Hen","Fangorn Forest","Plains of Rohan","Westfold","Gap of Rohan","Deeping Wall","Breached Wall","Hornburg Courtyard"};
     T.levelNumbers = new List<int> {17792,17808,17824,17840,17856,17872,17888,17896,17904,17920,17936,17952};
     T.levels = new Dictionary<string, List<string>>(){
-        {"Prologue", new List<string> {"Kill them all","Shield Orcs arrive","Volcano erupts","END"}},
-        {"Weathertop", new List<string> {"Back foul thing","Help! They're everywhere!","We shall find you","END"}},
-        {"Gates of Moria", new List<string> {"This land has changed","Quickly this way","My cousin, Balin","Watcher in the Water","END"}},
-        {"Balin's Tomb", new List<string> {"Goblin horde","Cave troll melee","Cave troll ranged","END"}},
-        {"Amon Hen", new List<string> {"We must defend him","Find the Halfling!","Fire","Frodo hides","Bridge","Frodo Escapes","Enter Lurtz","Lurtz Fight","END"}},
-        {"Fangorn Forest", new List<string> {"Split up","Forest Troll 1","Camp Pit","Forest Troll 2","Forest Troll 3 & 4", "END"}},
-        {"Plains of Rohan", new List<string> {"Arrival","Gandalf Blast","Through the fire","Save the couple","END"}},
-        {"Westfold", new List<string> {"Strange explosives","Gate","Lake","END"}},
-        {"Gap of Rohan", new List<string> {"Wargs","Boss","END"}},
-        {"Deeping Wall", new List<string> {"Ladders","Archer Attack","Catapult Attack","END"}},
-        {"Breached Wall", new List<string> {"Close the gate","Archers","Troll","Catapult","END"}},
-        {"Hornburg Courtyard", new List<string> {"Protect the gate","Help Friend","Uruk-Hai","Trolls Spawn","Trolls Defeated","END"}}
+        {"Prologue", new List<string> {"Kill Them All","Shield Orcs Arrive","Volcano erupts","Sauron Attacks"}},
+        {"Weathertop", new List<string> {"Back Foul Thing","Help! They're Everywhere!","We Shall Find You","Nazgul Flee"}},
+        {"Gates of Moria", new List<string> {"This Land Has Changed","Quickly this way","My Cousin, Balin","Watcher in the Water","Door of Durin"}},
+        {"Balin's Tomb", new List<string> {"Goblin Horde","Cave Troll Melee","Cave Troll Ranged","Cave Troll Defeated"}},
+        {"Amon Hen", new List<string> {"We Must Defend Him","Find the Halfling!","Fire","Frodo Hides","Bridge","Frodo Escapes","Enter Lurtz","Lurtz Fight","Death of Boromir"}},
+        {"Fangorn Forest", new List<string> {"Split Up","Forest Troll 1","Camp Pit","Forest Troll 2","Forest Troll 3 & 4", "The White Wizard"}},
+        {"Plains of Rohan", new List<string> {"Arrival","Gandalf Blast","Through the Fire","Save the Couple","Still Have Work To Do"}},
+        {"Westfold", new List<string> {"Strange explosives","Gate","Lake","Kaboom!"}},
+        {"Gap of Rohan", new List<string> {"Wargs","Boss","Boss Defeated"}},
+        {"Deeping Wall", new List<string> {"Ladders","Archer Attack","Catapult Attack","Elves FTW"}},
+        {"Breached Wall", new List<string> {"Close the gate","Archers","Troll","Catapult","Compare Kills"}},
+        {"Hornburg Courtyard", new List<string> {"Protect the Gate","Help Friend","Uruk-Hai","Trolls Spawn","Trolls Defeated"}}
     };
     
     settings.Add("settings",true,"Settings");
@@ -85,9 +85,9 @@ startup {
     
     settings.Add("splits",true,"Splits");
     settings.SetToolTip("splits","Split upon starting ticked level, or reaching ticked cutscene. Final split when defeating trolls always splits whether ticked or not.");
-    for(int i = 0; i<T.levelNames.Count; i++){
+    for (int i = 0; i<T.levelNames.Count; i++){
         settings.Add(T.levelNames[i],true,T.levelNames[i],"splits");
-        for(int j = 1; j<T.levels[T.levelNames[i]].Count -1; j++) {
+        for (int j = 1; j<T.levels[T.levelNames[i]].Count; j++) {
             settings.Add(T.levels[T.levelNames[i]][j],false,T.levels[T.levelNames[i]][j],T.levelNames[i]);
         }
     }
@@ -103,30 +103,30 @@ update {
     current.MenuProgress = T.levelSelect[T.MenuProgress.Current];
 
     // Level
-    if(T.start == false) {
+    if (T.start == false) {
         current.Level = "Prologue";
         T.start = true;
     }
-    if(T.Level.Changed && T.Level.Current != 0) current.Level = T.levelNames[T.levelNumbers.IndexOf(T.Level.Current)];
+    if (T.Level.Changed && T.Level.Current != 0) current.Level = T.levelNames[T.levelNumbers.IndexOf(T.Level.Current)];
 
-    if(T.subSplit == 0) current.Section = T.levels[current.Level][0];
+    if (T.subSplit == 0) current.Section = T.levels[current.Level][0];
     else current.Section = T.levels[current.Level][T.subSplit-1];
     
-    if(T.Cutscene.Current == 0) current.InCutscene = "False";
+    if (T.Cutscene.Current == 0) current.InCutscene = "False";
     else current.InCutscene = "True";
 
     // Player
-    if(T.Level.Current == 17792) current.Character = "Isildur";
-    else if(T.Level.Current == 17808) current.Character = "Aragorn";
+    if (T.Level.Current == 17792) current.Character = "Isildur";
+    else if (T.Level.Current == 17808) current.Character = "Aragorn";
     else current.Character = T.characters[T.Character.Current];
 
-    if(T.Armor.Current > 0) current.Health = T.Health.Current + " HP + " + T.Armor.Current + " AR";
+    if (T.Armor.Current > 0) current.Health = T.Health.Current + " HP + " + T.Armor.Current + " AR";
     else current.Health = T.Health.Current + " HP";
     
     // Undo splits if restarting level after death, or restarting a level
     if (T.Ending.Current == 0 && T.Ending.Old == 5 || T.State.Changed && T.State.Current == 3 && settings["undo"]) {
         // Undo one less split if dying on Fangorn Forest, as there is a checkpoint at the first subsplit
-        if(T.Level.Current == 17872 && T.subSplit > 1){
+        if (T.Level.Current == 17872 && T.subSplit > 1){
             for(int i = 0; i<T.undoSplit-1; i++) T.timerModel.UndoSplit();
             T.subSplit = 2;
             T.undoSplit = 0;
@@ -150,24 +150,22 @@ start {
     // Aragorn starts on skipping opening Prologue cutscene
     if (T.MenuType.Current == 6 && T.State.Old == 1 && T.State.Current == 2 && T.Level.Current == 17792) {
         T.currentLevel = 0;
+        T.subSplit = 1;
+        T.undoSplit = 0;
+        print("Start: Aragorn");
         return true;
     }
     // Legolas/Gimil/Isildur starts on selecting character for Gates of Moria only
     else if (T.MenuType.Current == 1 && T.MenuProgress.Current == 3 && T.IsMenu.Old == 0 && T.IsMenu.Current == 6) {
-        if((settings["falseAragorn"] && T.Character.Current == 0) || (!settings["falseStart"] && T.LevelMenu.Current != 2)){
-            return false;
-        }
-        else{
+        if ((settings["falseAragorn"] && T.Character.Current == 0) || (!settings["falseStart"] && T.LevelMenu.Current != 2)) return false;
+        else {
             T.currentLevel = 2;
+            T.subSplit = 0;
+            T.undoSplit = 0;
+            print("Start: " + current.Character);
             return true;
         }
     }
-}
-
-onStart {
-    var T = vars.T;
-    T.subSplit = 0;
-    T.undoSplit = 0;
 }
 
 split {
@@ -177,16 +175,13 @@ split {
         T.currentLevel = 1;
         T.subSplit = 0;
         T.undoSplit = 0;
-
         print("Prologue Skip");
         return true;
     }
     
     // Split when starting a new level
     else if (T.MenuProgress.Current == 3 && T.IsMenu.Old == 0 && T.IsMenu.Current == 6) {
-        if(T.LevelMenu.Current != T.currentLevel + 1 && settings["correct"]){
-            return false;
-        }
+        if (T.LevelMenu.Current != T.currentLevel + 1 && settings["correct"]) return false;
         else {
             T.currentLevel = T.LevelMenu.Current;
             print("New Level Skip");
@@ -198,8 +193,8 @@ split {
     else if (T.Cutscene.Old == 0 && T.Cutscene.Current == 1 && T.Health.Current != 0) {
         T.subSplit++;
         var check = T.levels[current.Level][T.subSplit-1];
-        if(T.subSplit == 1) return false;
-        else if ((settings[check] && check != "END") || check == "Trolls Defeated"){
+        if (T.subSplit == 1) return false;
+        else if (settings[check] || check == "Trolls Defeated"){
             T.undoSplit++;
             print("Subsplit Skip: " + check);
             return true;
